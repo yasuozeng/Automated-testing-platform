@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+
+# 给app命名
 app_name='project'
+# 映射html
 urlpatterns = [
     path('list', views.list,name='project_list'),
     path('add', views.add,name='project_add'),

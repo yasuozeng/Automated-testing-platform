@@ -27,5 +27,6 @@ urlpatterns = [
     path('list', views.list,name='book_list'),
     # path('list/<str:list_id>', views.list),
     path('details', views.details,name='book_details'),
-    path('book_to',views.book_list_to_movie_list,name= 'book_to')
+    path('book_to',views.book_list_to_movie_list,name= 'book_to'),
+    path('test', views.test,name='test'),
 ]

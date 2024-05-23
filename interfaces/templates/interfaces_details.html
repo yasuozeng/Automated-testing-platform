@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>接口详情</title>
+</head>
+<body>
+    <a href="{% url 'interfaces:list' %}">返回上一页</a>
+    <div>
+        <form>
+            <h1>interfaces_id: {{ interfaces_id }}</h1>
+            接口名称：<input  type="text" placeholder="请输入需要修改的接口名称"/><br /><br /><!--接口名称输入且换行两次-->
+            请求方式:<select>
+                        <option value="1">GET</option>
+                        <option value="2">POST</option>
+                        <option value="3">PUT</option>
+                        <option value="4">DELETE</option>
+                    </select>
+            <br /><br />
+            接口地址：<input  type="text" placeholder="/test/list"/><br /><br /><!--接口输入且换行两次-->
+<!--            请求头：<input  type="text" placeholder="请输入请求头"/><br /><br />&lt;!&ndash;接口名称输入且换行两次&ndash;&gt;-->
+<!--            请求体：<input  type="text" placeholder="请输入请求体"/><br /><br />&lt;!&ndash;接口名称输入且换行两次&ndash;&gt;-->
+            提交按钮   <input type="submit"/><!--提交以上输入内容-->
+        </form>
+    </div>
+</body>
+</html>
+
+

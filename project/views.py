@@ -6,12 +6,14 @@ from django.shortcuts import render, redirect
 
 
 def list(request):
+    # 项目列表
     projects = {'项目1','项目2'}  # 获取所有项目
     context = {'projects': projects}  # 创建上下文数据
     return render(request, 'project_list.html', context)  # 渲染模板并返回响应
 
 
 def add(request):
+    # 新增项目
     pass
     # if request.method == 'POST':
     #     project_name = request.POST.get('project_name')  # 获取表单输入的项目名称
@@ -28,14 +30,13 @@ def add(request):
     #     # GET请求时，返回一个错误页面或者直接重定向到项目列表，取决于你的设计
     #     return redirect('project_list')
 
-def details(request):
-    pass
-
 def delete(request):
-    pass
+    # 删除项目
     # 调用删除项目接口
+    return render(request, 'project_delete.html')  # 渲染模板并返回响应
 
 def details_list(request):
+    # 项目详情
     projects = ['环境','接口管理','接口用例','业务流程','测试计划','定时任务','测试报告'] # 获取所有项目
     context = {'projects': projects}  # 创建上下文数据
     return render(request, 'project_details_list.html', context)  # 渲染模板并返回响应

@@ -28,7 +28,7 @@ urlpatterns = [
     path('',index),
     # path('book',views.index)
     # path('book/<book_id>', views.index1),
-    path('book/<int:book_id>', views.index1),
+    # path('book/<int:book_id>', views.index1),
     path('book/',include('book.urls'),name='book'),
     path('movie/',include('movie.urls'),name='movie'),
     path('project/',include('project.urls'),name='project'),

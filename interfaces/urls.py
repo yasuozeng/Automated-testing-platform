@@ -21,9 +21,7 @@ from django.shortcuts import render
 from django.template import Template
 app_name = 'interfaces'#接口管理
 urlpatterns = [
-    # path('book',views.index)
-    # path('book/<book_id>', views.index1),
-    # path('book/<int:book_id>', views.index1)
     path('list', views.list,name='list'),
-
+    path('details', views.details,name='details'),
+    path('delete', views.delete,name='delete'),
 ]

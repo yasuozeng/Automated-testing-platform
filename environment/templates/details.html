@@ -2,27 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>环境列表</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/project_list.css' %}">
+    <title>环境详情</title>
 </head>
 <body>
-    <div class="container">
-        <h1>环境列表</h1>
-        <form method="post" action="{% url 'environment:list' %}">
-            {% csrf_token %}
-            <input type="text" name="project_name" style="width: 200px; margin-right: 10px;" placeholder="请输入环境名称">
-            <button type="submit">新增环境</button>
-        </form>
+    <a href="{% url 'environment:list' %}">返回上一页</a>
+    <div>
 
-        {% for project in projects %}
-            <div class="project">
-                <h2>{{ project.title }}</h2>
-                <p>{{ project.description }}</p>
-                <a href="{{ environment.details }}">环境详情 &rarr;</a>
-                <a href="{{ environment.delete }}">删除 &rarr;</a>
-            </div>
-        {% endfor %}
+        <form>
+            <h1>Environment_id: {{ environment_id }}</h1>
+            环境名称：<input  type="text" placeholder="请输入需要修改的环境名称"/><br /><br /><!--环境名称输入且换行两次-->
+            服务器域名：<input  type="text" placeholder="http://139.159.205.158:8888"/><br /><br /><!--服务器域名输入且换行两次-->
+            提交按钮   <input type="submit"/><!--提交以上输入内容-->
+        </form>
     </div>
 </body>
 </html>
+
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>接口列表</title>
+</head>
+<body>
+    <div >
+        <a href="{% url 'project:project_list' %}">返回上一页</a>
+        <h1>接口列表</h1>
+<!--        <form method="post" action="{% url 'interfaces:list' %}">-->
+        <input type="text" name="interfaces_name" style="width: 200px; margin-right: 10px;" placeholder="请输入接口名称">
+        <button type="submit">新增接口</button>
+<!--        </form>-->
+        {% for project in projects %}
+            <div class="project">
+                <h2>{{ project.title }}</h2>
+                <p>{{ project.description }}</p>
+                <a href="{% url 'interfaces:details' %}">接口11详情</a>
+                <a href="{% url 'interfaces:delete' %}">删除</a>
+
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
