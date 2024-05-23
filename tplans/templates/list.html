@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>环境列表</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/project_list.css' %}">
+</head>
+<body>
+    <div class="container">
+        <a href="{% url 'project:project_details_list' %}">返回上一页</a>
+        <h1>环境列表</h1>
+        <form method="post" action="{% url 'environment:list' %}">
+            {% csrf_token %}
+            <input type="text" name="project_name" style="width: 200px; margin-right: 10px;" placeholder="请输入环境名称">
+            <button type="submit">新增环境</button>
+        </form>
+
+        {% for project in projects %}
+            <div class="project">
+                <h2>{{ project.title }}</h2>
+                <p>{{ project.description }}</p>
+                <a href="{{ environment.details }}">环境详情 &rarr;</a>
+                <a href="{{ environment.delete }}">删除 &rarr;</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
