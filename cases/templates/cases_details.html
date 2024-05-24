@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>接口用例详情</title>
+</head>
+<body>
+    <a href="{% url 'cases:list' %}">返回上一页</a>
+    <div>
+        <form>
+            <h1>cases_id: {{ cases_id }}</h1>
+            接口用例名称：<input  type="text" placeholder="请输入接口用例名称"/><br /><br /><!--接口名称输入且换行两次-->
+            api信息:<h1>cases_api: {{ cases_api }}</h1><!--api信息展示-->
+            前置脚本：<input  type="text" placeholder="请输入接口前置脚本"/><br /><br /><!--前置脚本输入-->
+            请求头：<input  type="text" placeholder="请输入接口请求头"/><br /><br /><!--请求头输入-->
+            请求体：<input  type="text" placeholder="请输入接口请求体"/><br /><br /><!--请求体输入-->
+            后置断言脚本：<input  type="text" placeholder="请输入接口后置断言脚本"/><br /><br /><!--后置断言脚本输入-->
+            提交按钮   <input type="submit"/><!--提交以上输入内容-->
+        </form>
+    </div>
+</body>
+</html>

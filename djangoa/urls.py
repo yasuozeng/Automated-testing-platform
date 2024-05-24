@@ -15,20 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.shortcuts import render
 from django.urls import path,include
 from book import views
 from django.http import HttpResponse
 from django.template import Template
 
 def index(request):
-    return HttpResponse('首页')
+    # 项目列表
+    projects = {'项目1','项目2'}  # 获取所有项目
+    context = {'projects': projects}  # 创建上下文数据
+    return render(request, 'project_list.html', context)  # 渲染模板并返回响应
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',index),
-    # path('book',views.index)
-    # path('book/<book_id>', views.index1),
-    # path('book/<int:book_id>', views.index1),
+    path('',index,name='index'),
     path('book/',include('book.urls'),name='book'),
     path('movie/',include('movie.urls'),name='movie'),
     path('project/',include('project.urls'),name='project'),
@@ -39,6 +40,4 @@ urlpatterns = [
     path('processes/',include('processes.urls'),name='processes'),
     path('tasks/',include('tasks.urls'),name='tasks'),
     path('reports/',include('reports.urls'),name='reports'),
-    # path('project/',include('project_list.urls'),name='project')
-
 ]
