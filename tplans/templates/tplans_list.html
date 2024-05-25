@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试计划列表</title>
+</head>
+<body>
+    <div >
+        <a href="{% url 'project:project_details_list' %}">返回上一页</a>
+        <h1>测试计划列表</h1>
+        {% for project in projects %}
+            <div class="project">
+                <h2>{{ project.title }}</h2>
+                <p>{{ project.description }}</p>
+                <a href="{% url 'tplans:details' %}">测试计划流程详情</a>
+                <a href="{% url 'tplans:delete' %}">测试计划流程删除</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

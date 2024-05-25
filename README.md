@@ -9,3 +9,14 @@ processes 业务流程
 tplans 测试计划
 tasks 定时任务
 reports 测试报告
+
+#生成数据库表
+python manage.py migrate
+
+#创建一个超级管理员账户
+PS D:\django\djangoa> python manage.py createsuperuser
+Username: admin
+Email address: 1265424150@qq.com
+zeng.123
+
+ctrl+shift+n进入无痕浏览模式，无缓存，方便调试

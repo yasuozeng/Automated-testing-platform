@@ -9,19 +9,35 @@
 <body>
     <div class="container">
         <h1>项目列表</h1>
-        <form method="post" action="{% url 'project:project_list' %}">
+        <form method="post" action="{% url 'project:project_add' %}">
             {% csrf_token %}
             <input type="text" name="project_name" style="width: 200px; margin-right: 10px;" placeholder="请输入项目名称">
             <button type="submit">新增项目</button>
         </form>
-
+<!--        </form action="{% url 'project:project_delete' %}" method="post">-->
+<!--        {% for project in projects %}-->
+<!--            <div class="project">-->
+<!--                <h2>{{ project.title }}</h2>-->
+<!--                <input type="radio"  name="option1" value="project.title">-->
+<!--                <input type="submit" value="删除项目"/>-->
+<!--            </div>-->
+<!--        {% endfor %}-->
+<!--        </form>-->
         {% for project in projects %}
-            <div class="project">
-                <h2>{{ project.title }}</h2>
-                <p>{{ project.description }}</p>
-                <a href="{% url 'project:project_details_list' %}">项目详情</a>
-                <a href="{% url 'project:project_delete' %}">删除</a>
-            </div>
+            <form action="{% url 'project:project_delete' %}" method="post">
+                {% csrf_token %} <!-- Django表单需要CSRF令牌 -->
+                <div class="project">
+                    <h2>{{ project.title }}</h2>
+                    <!-- 更改为复选框以允许选择多个项目，或保留单选框但确保逻辑符合需求 -->
+                    <input type="hidden" name="project_delete" value="{{ project.title }}"> <!-- 添加隐藏字段传递项目ID -->
+                    <input type="submit" value="删除项目"/>
+                </div>
+            </form>
+            <form action="{% url 'project:project_details_list' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="project_datails" value="{{ project.title }}">
+                <button type="submit">查看项目详情列表</button>
+            </form>
         {% endfor %}
     </div>
 </body>

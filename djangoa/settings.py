@@ -58,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',  # 确保 session 中间件已启用，因为 messages 需要它
+    'django.contrib.messages.middleware.MessageMiddleware',  # 启用消息中间件
 ]
 
 ROOT_URLCONF = 'djangoa.urls'
@@ -116,8 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True

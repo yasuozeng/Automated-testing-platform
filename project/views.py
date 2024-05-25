@@ -1,42 +1,71 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
-
-
+import requests
 # Create your views here.
 
 
 def list(request):
     # 项目列表
-    projects = {'项目1','项目2'}  # 获取所有项目
+    # projects = ['项目1','项目2']  # 获取所有项目
+    url = "http://localhost:5000/project_list"  # 确保这与运行Flask应用的地址和端口匹配
+    response = requests.get(url)
+    projects=response.json()
     context = {'projects': projects}  # 创建上下文数据
     return render(request, 'project_list.html', context)  # 渲染模板并返回响应
 
-
 def add(request):
     # 新增项目
-    pass
-    # if request.method == 'POST':
-    #     project_name = request.POST.get('project_name')  # 获取表单输入的项目名称
-    #     # 调用接口函数，这里假设它接受项目名称并返回一些状态信息
-    #     response = call_api_to_add_project(project_name)
-    #
-    #     # 假设接口调用成功，重定向到项目列表页面
-    #     if response['status'] == 'success':
-    #         return redirect('project_list')  # project_list是你项目列表的URL名称
-    #     else:
-    #         # 处理错误情况，比如返回错误信息给前端或重定向到错误页面
-    #         return JsonResponse({'error': '项目添加失败'}, status=400)
-    # else:
-    #     # GET请求时，返回一个错误页面或者直接重定向到项目列表，取决于你的设计
-    #     return redirect('project_list')
+    if request.method == 'POST':
+        # 如果是 POST 请求，获取表单中的数据
+        project_name = request.POST.get('project_name')
+        # 在这里处理获取到的项目名称数据，例如保存到数据库中
+        url = "http://localhost:5000/project_add"
+        # 准备要发送的JSON数据
+        data = {
+            "name": f"{project_name}"
+        }
+        # 发送POST请求
+        requests.post(url, json=data)
+        return HttpResponse(f'新增项目成功：{project_name}')
+    else:
+        # 如果不是 POST 请求，返回空白页面
+        return HttpResponse('')
+
+
+
 
 def delete(request):
     # 删除项目
     # 调用删除项目接口
+    # if request.method == 'POST':
+    #     # 如果是 POST 请求，获取表单中的数据
+    #     project_name = request.POST.get('project_name')
+    #     url = "http://localhost:5000/project_delete"
+    #     # 准备要发送的JSON数据
+    #     data = {
+    #         "name": f"{project_id}"
+    #     }
+    #     # 发送POST请求
+    #     requests.post(url, json=data)
+
+    if request.method == 'POST':
+        # 如果是 POST 请求，获取表单中的数据
+        project_name = request.POST.get('project_delete')
+        # 在这里处理获取到的项目名称数据，例如保存到数据库中
+        url = "http://localhost:5000/project_delete"
+        # 准备要发送的JSON数据
+        data = {
+            "name": f"{project_name}"
+        }
+        print(f"45646546546465465:::{data}")
+        requests.post(url, json=data)
     return render(request, 'project_delete.html')  # 渲染模板并返回响应
 
 def details_list(request):
     # 项目详情
+    if request.method == 'POST':
+        # 如果是 POST 请求，获取表单中的数据
+        project_name = request.POST.get('project_datails')
     projects = ['环境','接口管理','接口用例','业务流程','测试计划','定时任务','测试报告'] # 获取所有项目
     context = {'projects': projects}  # 创建上下文数据
     return render(request, 'project_details_list.html', context)  # 渲染模板并返回响应

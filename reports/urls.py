@@ -25,5 +25,8 @@ urlpatterns = [
     # path('book/<book_id>', views.index1),
     # path('book/<int:book_id>', views.index1)
     path('list', views.list,name='list'),
+    path('details', views.details, name='details'),
+    path('delete', views.delete, name='delete'),
+
 
 ]
