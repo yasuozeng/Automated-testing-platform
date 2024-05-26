@@ -7,7 +7,7 @@ import requests
 def list(request):
     # 项目列表
     # projects = ['项目1','项目2']  # 获取所有项目
-    url = "http://localhost:5000/project_list"  # 确保这与运行Flask应用的地址和端口匹配
+    url = "http://localhost:5000/project/project_list"  # 确保这与运行Flask应用的地址和端口匹配
     response = requests.get(url)
     projects=response.json()
     context = {'projects': projects}  # 创建上下文数据
@@ -19,7 +19,7 @@ def add(request):
         # 如果是 POST 请求，获取表单中的数据
         project_name = request.POST.get('project_name')
         # 在这里处理获取到的项目名称数据，例如保存到数据库中
-        url = "http://localhost:5000/project_add"
+        url = "http://localhost:5000/project/project_add"
         # 准备要发送的JSON数据
         data = {
             "name": f"{project_name}"
@@ -32,27 +32,14 @@ def add(request):
         return HttpResponse('')
 
 
-
-
 def delete(request):
     # 删除项目
     # 调用删除项目接口
-    # if request.method == 'POST':
-    #     # 如果是 POST 请求，获取表单中的数据
-    #     project_name = request.POST.get('project_name')
-    #     url = "http://localhost:5000/project_delete"
-    #     # 准备要发送的JSON数据
-    #     data = {
-    #         "name": f"{project_id}"
-    #     }
-    #     # 发送POST请求
-    #     requests.post(url, json=data)
-
     if request.method == 'POST':
         # 如果是 POST 请求，获取表单中的数据
         project_name = request.POST.get('project_delete')
         # 在这里处理获取到的项目名称数据，例如保存到数据库中
-        url = "http://localhost:5000/project_delete"
+        url = "http://localhost:5000/project/project_delete"
         # 准备要发送的JSON数据
         data = {
             "name": f"{project_name}"
@@ -66,6 +53,8 @@ def details_list(request):
     if request.method == 'POST':
         # 如果是 POST 请求，获取表单中的数据
         project_name = request.POST.get('project_datails')
+    projects2 = []
+    projects2.append(project_name)
     projects = ['环境','接口管理','接口用例','业务流程','测试计划','定时任务','测试报告'] # 获取所有项目
-    context = {'projects': projects}  # 创建上下文数据
+    context = {'projects': projects,'projects2': projects2}  # 创建上下文数据
     return render(request, 'project_details_list.html', context)  # 渲染模板并返回响应

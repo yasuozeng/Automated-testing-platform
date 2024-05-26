@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import requests
 from django.contrib import admin
 from django.shortcuts import render
 from django.urls import path,include
@@ -23,7 +24,10 @@ from django.template import Template
 
 def index(request):
     # 项目列表
-    projects = {'项目1','项目2'}  # 获取所有项目
+    # projects = ['项目1','项目2']  # 获取所有项目
+    url = "http://localhost:5000/project/project_list"  # 确保这与运行Flask应用的地址和端口匹配
+    response = requests.get(url)
+    projects=response.json()
     context = {'projects': projects}  # 创建上下文数据
     return render(request, 'project_list.html', context)  # 渲染模板并返回响应
 

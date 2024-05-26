@@ -5,14 +5,26 @@
     <title>项目详情</title>
 </head>
 <body>
+    {% for project_name in projects2 %}
     <div class="container">
-        <a href="{% url 'project:project_list' %}">返回上一页</a>
-        <h1>项目详情</h1>
+        <a href="{% url 'project:project_list' %}" name="project_datails" value="{{ project_name }}" >返回上一页</a>
+<!--        {% for project_name in projects2 %}-->
+            <h1>{{ project_name }}项目详情</h1>
+<!--        {% endfor %}-->
         {% for project in projects %}
             <div class="project">
                 <h2>{{ project }}</h2>
                 {% if project == '环境' %}
                     <a href="{% url 'environment:list' %}">管理环境 </a>
+
+<!--                    style="display:inline;": 使用内联样式让表单元素显示为内联块，使其在页面中与其他内容并排显示。-->
+                    <form action="{% url 'environment:list' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="project_datails" value="{{ project_name }}">
+                        <button type="submit">查看并编辑环境</button>
+                    </form>
+
+
                 {% elif project == '接口管理' %}
                     <a href="{% url 'interfaces:list' %}">接口管理 </a>
                 {% elif project == '接口用例' %}
@@ -28,7 +40,7 @@
                 {% endif %}
             </div>
         {% endfor %}
-
     </div>
+    {% endfor %}
 </body>
 </html>
