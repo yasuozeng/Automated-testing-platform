@@ -24,6 +24,8 @@ urlpatterns = [
     path('details', views.details,name='details'),
     path('delete', views.delete,name='delete'),
     path('update', views.update,name='update'),
-
+    path('base', views.base,name='base'),
+    path('bootstrap', views.bootstrap,name='bootstrap'),
+    path('add', views.add,name='add'),
     # path('add', views.delete,name='project_delete'),
 ]

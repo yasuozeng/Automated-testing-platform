@@ -1,0 +1,156 @@
+<!-- leads/templates/leads/lead_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>线索管理</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+        .sidebar {
+            height: 100vh;
+            padding-top: 20px;
+            background-color: #f8f9fa;
+        }
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar bg-light">
+            <h2>Polestar</h2>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">线索列表</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">城市匹配表</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">门店权限管理</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">试乘试驾管理</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">客户管理</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Space计划管理</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">整车订单管理</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">整车库存管理</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">整车权益管理</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">整车调拨管理</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">整车财务管理</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">OTD规则管理</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Content -->
+        <div class="content">
+            <h2>线索列表</h2>
+            <form class="form-inline mb-4">
+                <div class="form-group mr-2">
+                    <label for="customerName" class="sr-only">客户姓名</label>
+                    <input type="text" class="form-control" id="customerName" placeholder="请输入客户姓名">
+                </div>
+                <div class="form-group mr-2">
+                    <label for="phoneNumber" class="sr-only">手机号</label>
+                    <input type="text" class="form-control" id="phoneNumber" placeholder="请输入手机号">
+                </div>
+                <div class="form-group mr-2">
+                    <label for="customerSource" class="sr-only">客户来源</label>
+                    <select class="form-control" id="customerSource">
+                        <option>请选择</option>
+                    </select>
+                </div>
+                <div class="form-group mr-2">
+                    <label for="intentionCarSeries" class="sr-only">意向车系</label>
+                    <select class="form-control" id="intentionCarSeries">
+                        <option>请选择</option>
+                    </select>
+                </div>
+                <div class="form-group mr-2">
+                    <label for="leadStage" class="sr-only">线索阶段</label>
+                    <select class="form-control" id="leadStage">
+                        <option>请选择</option>
+                    </select>
+                </div>
+                <div class="form-group mr-2">
+                    <label for="leadStatus" class="sr-only">线索状态</label>
+                    <select class="form-control" id="leadStatus">
+                        <option>请选择</option>
+                    </select>
+                </div>
+                <div class="form-group mr-2">
+                    <label for="leadRating" class="sr-only">线索评级</label>
+                    <select class="form-control" id="leadRating">
+                        <option>请选择</option>
+                    </select>
+                </div>
+                <div class="form-group mr-2">
+                    <label for="createdAt" class="sr-only">线索创建时间</label>
+                    <input type="date" class="form-control" id="createdAt">
+                </div>
+                <button type="submit" class="btn btn-primary">查询</button>
+                <button type="reset" class="btn btn-secondary ml-2">重置</button>
+            </form>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>客户姓名</th>
+                        <th>手机号</th>
+                        <th>客户来源</th>
+                        <th>意向车系</th>
+                        <th>线索阶段</th>
+                        <th>线索状态</th>
+                        <th>线索评级</th>
+                        <th>线索创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lead in leads %}
+                    <tr>
+                        <td>{{ lead.customer_name }}</td>
+                        <td>{{ lead.phone_number }}</td>
+                        <td>{{ lead.customer_source }}</td>
+                        <td>{{ lead.intention_car_series }}</td>
+                        <td>{{ lead.lead_stage }}</td>
+                        <td>{{ lead.lead_status }}</td>
+                        <td>{{ lead.lead_rating }}</td>
+                        <td>{{ lead.created_at }}</td>
+                        <td><a href="#" class="text-primary">详情</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 引入 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- 引入 Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

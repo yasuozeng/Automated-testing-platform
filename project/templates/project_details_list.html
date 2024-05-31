@@ -1,46 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>项目详情</title>
+    <meta charset="UTF-8"> <!-- 设置文档的字符编码为UTF-8 -->
+    <title>项目详情</title> <!-- 设置页面标题 -->
 </head>
 <body>
-    {% for project_name in projects2 %}
-    <div class="container">
-        <a href="{% url 'project:project_list' %}" name="project_datails" value="{{ project_name }}" >返回上一页</a>
-<!--        {% for project_name in projects2 %}-->
-            <h1>{{ project_name }}项目详情</h1>
-<!--        {% endfor %}-->
-        {% for project in projects %}
-            <div class="project">
-                <h2>{{ project }}</h2>
-                {% if project == '环境' %}
-                    <a href="{% url 'environment:list' %}">管理环境 </a>
-
-<!--                    style="display:inline;": 使用内联样式让表单元素显示为内联块，使其在页面中与其他内容并排显示。-->
-                    <form action="{% url 'environment:list' %}" method="post" style="display:inline;">
-                        {% csrf_token %}
-                        <input type="hidden" name="project_datails" value="{{ project_name }}">
-                        <button type="submit">查看并编辑环境</button>
+    {% for project_name in projects2 %} <!-- 循环遍历projects2列表，获取每个项目名称 -->
+    <div class="container"> <!-- 定义一个容器div -->
+        <a href="{% url 'project:project_list' %}" name="project_datails" value="{{ project_name }}" >返回上一页</a> <!-- 返回上一页的链接，传递项目名称 -->
+        <!-- 注释掉的代码块：原先用于显示项目名称的标题，已注释 -->
+        <!-- {% for project_name in projects2 %} -->
+            <h1>{{ project_name }}项目详情</h1> <!-- 显示项目名称的标题 -->
+        <!-- {% endfor %} -->
+        {% for project in projects %} <!-- 循环遍历projects列表，获取每个项目详情 -->
+            <div class="project"> <!-- 定义一个项目div -->
+                <h2>{{ project }}</h2> <!-- 显示项目详情 -->
+                {% if project == '环境' %} <!-- 如果项目详情是'环境' -->
+                    <a >管理环境</a> <!-- 链接到环境管理页面 -->
+                    <!-- 使用内联样式让表单元素显示为内联块，使其在页面中与其他内容并排显示 -->
+                    <form action="{% url 'environment:list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看并编辑环境的请求 -->
+                        {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+                        <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+                        <button type="submit">查看并编辑环境</button> <!-- 提交按钮，查看并编辑环境 -->
                     </form>
-
-
-                {% elif project == '接口管理' %}
-                    <a href="{% url 'interfaces:list' %}">接口管理 </a>
-                {% elif project == '接口用例' %}
-                    <a href="{% url 'cases:interfaces' %}">接口用例 </a>
-                {% elif project == '业务流程' %}
-                    <a href="{% url 'processes:flow_list' %}">业务流程 </a>
-                {% elif project == '测试计划' %}
-                    <a href="{% url 'tplans:list' %}">测试计划 </a>
-                {% elif project == '定时任务' %}
-                    <a href="{% url 'tasks:list' %}">定时任务 </a>
-                {% elif project == '测试报告' %}
-                    <a href="{% url 'reports:list' %}">测试报告 </a>
-                {% endif %}
+                {% elif project == '接口管理' %} <!-- 如果项目详情是'接口管理' -->
+                    <a >接口管理</a> <!-- 链接到接口管理页面 -->
+                    <!-- 使用内联样式让表单元素显示为内联块，使其在页面中与其他内容并排显示 -->
+                    <form action="{% url 'interfaces:list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看并编辑环境的请求 -->
+                        {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+                        <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+                        <button type="submit">查看并编辑接口管理</button> <!-- 提交按钮，查看并编辑环境 -->
+                    </form>
+                {% elif project == '接口用例' %} <!-- 如果项目详情是'接口用例' -->
+                    <a >接口用例</a> <!-- 链接到接口用例页面 -->
+                    <!-- 使用内联样式让表单元素显示为内联块，使其在页面中与其他内容并排显示 -->
+                    <form action="{% url 'cases:list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看并编辑环境的请求 -->
+                        {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+                        <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+                        <button type="submit">查看并编辑接口用例</button> <!-- 提交按钮，查看并编辑环境 -->
+                    </form>
+                {% elif project == '业务流程' %} <!-- 如果项目详情是'业务流程' -->
+                    <a >业务流程</a> <!-- 链接到业务流程页面 -->
+                                    <!-- 使用内联样式让表单元素显示为内联块，使其在页面中与其他内容并排显示 -->
+                    <form action="{% url 'processes:flow_list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看并编辑环境的请求 -->
+                        {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+                        <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+                        <button type="submit">查看并编辑业务流程</button> <!-- 提交按钮，查看并编辑环境 -->
+                    </form>
+                {% elif project == '测试计划' %} <!-- 如果项目详情是'测试计划' -->
+                    <a >测试计划</a> <!-- 链接到测试计划页面 -->
+                    <form action="{% url 'tplans:list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看并编辑环境的请求 -->
+                        {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+                        <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+                        <button type="submit">查看并编辑测试计划</button> <!-- 提交按钮，查看并编辑环境 -->
+                    </form>
+                {% elif project == '定时任务' %} <!-- 如果项目详情是'定时任务' -->
+                    <a >定时任务</a> <!-- 链接到定时任务页面 -->
+                    <form action="{% url 'tasks:list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看并编辑环境的请求 -->
+                        {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+                        <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+                        <button type="submit">查看并编辑定时任务</button> <!-- 提交按钮，查看并编辑环境 -->
+                    </form>
+                {% elif project == '测试报告' %} <!-- 如果项目详情是'测试报告' -->
+                    <a >测试报告</a> <!-- 链接到测试报告页面 -->
+                    <form action="{% url 'reports:list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看并编辑环境的请求 -->
+                        {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+                        <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+                        <button type="submit">查看并编辑测试报告</button> <!-- 提交按钮，查看并编辑环境 -->
+                    </form>
+                {% endif %} <!-- 结束条件判断 -->
             </div>
-        {% endfor %}
+        {% endfor %} <!-- 结束循环 -->
     </div>
-    {% endfor %}
+    {% endfor %} <!-- 结束循环 -->
 </body>
 </html>

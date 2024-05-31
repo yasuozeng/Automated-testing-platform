@@ -5,16 +5,44 @@
     <title>环境详情</title>
 </head>
 <body>
-    <a href="{% url 'environment:list' %}">返回上一页</a>
+    {% for project_name in projects2 %}
+    <form action="{% url 'environment:list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看并编辑环境的请求 -->
+        {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+        <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+        <button type="submit">返回上一页</button> <!-- 提交按钮，查看并编辑环境 -->
+     </form>
     <div>
+        {% for environment_old_name in projects %}
+            <form method="post" action="{% url 'environment:update' %}" style="display:inline;">
+                {% csrf_token %}
+                <h1>environment_old_name: {{ environment_old_name }}</h1>
+                {% for environment_host in projects4 %}
+                    {% csrf_token %}
+                    <h1>
+                        服务器域名：{{ environment_host }}
+                    </h1>
+                {% endfor %}
+                环境名称：
+                <input type="text" name="environment_new_name" style="width: 200px; margin-right: 10px;" placeholder="请输入环境名称">
+                服务器域名：
+                <input type="text" name="host" style="width: 200px; margin-right: 10px;" placeholder="http://139.159.205.158:8888">
+                <br /><br /><!--服务器域名输入且换行两次-->
+                <input type="hidden" name="environment_old_name" value="{{ environment_old_name }}"> <!-- 隐藏输入框，传递环境老名称 -->
+                <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+                提交按钮   <input type="submit"/><!--提交以上输入内容-->
+            </form>
+        {% endfor %}
 
-        <form>
-            <h1>Environment_id: {{ environment_id }}</h1>
-            环境名称：<input  type="text" placeholder="请输入需要修改的环境名称"/><br /><br /><!--环境名称输入且换行两次-->
-            服务器域名：<input  type="text" placeholder="http://139.159.205.158:8888"/><br /><br /><!--服务器域名输入且换行两次-->
-            提交按钮   <input type="submit"/><!--提交以上输入内容-->
-        </form>
     </div>
+<!--    <div>-->
+<!--        {% for environment_host in projects4 %}-->
+<!--            {% csrf_token %}-->
+<!--            <h1>-->
+<!--                服务器域名：{{ environment_host }}-->
+<!--            </h1>-->
+<!--        {% endfor %}-->
+<!--    </div>-->
+    {% endfor %}
 </body>
 </html>
 

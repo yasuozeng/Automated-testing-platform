@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>项目列表</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/project_list.css' %}">
+    <meta charset="UTF-8"> <!-- 设置文档的字符编码为UTF-8 -->
+    <title>项目列表</title> <!-- 设置页面标题 -->
+    {% load static %} <!-- 加载Django的static模板标签库 -->
+    <link rel="stylesheet" href="{% static 'css/project_list.css' %}"> <!-- 引用静态CSS文件 -->
 </head>
 <body>
-    <div class="container">
-        <h1>项目列表</h1>
-        <form method="post" action="{% url 'project:project_add' %}">
-            {% csrf_token %}
-            <input type="text" name="project_name" style="width: 200px; margin-right: 10px;" placeholder="请输入项目名称">
-            <button type="submit">新增项目</button>
+    <div class="container"> <!-- 定义一个容器div -->
+        <h1>项目列表</h1> <!-- 标题 -->
+        <form method="post" action="{% url 'project:project_add' %}"> <!-- 表单，提交新增项目的请求 -->
+            {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+            <input type="text" name="project_name" style="width: 200px; margin-right: 10px;" placeholder="请输入项目名称"> <!-- 输入框，输入项目名称 -->
+            <button type="submit">新增项目</button> <!-- 提交按钮 -->
         </form>
-<!--        </form action="{% url 'project:project_delete' %}" method="post">-->
-<!--        {% for project in projects %}-->
-<!--            <div class="project">-->
-<!--                <h2>{{ project.title }}</h2>-->
-<!--                <input type="radio"  name="option1" value="project.title">-->
-<!--                <input type="submit" value="删除项目"/>-->
-<!--            </div>-->
-<!--        {% endfor %}-->
-<!--        </form>-->
-        {% for project in projects %}
-            <form action="{% url 'project:project_delete' %}" method="post">
-                {% csrf_token %} <!-- Django表单需要CSRF令牌 -->
-                <div class="project">
-                    <h2>{{ project.title }}</h2>
-                    <!-- 更改为复选框以允许选择多个项目，或保留单选框但确保逻辑符合需求 -->
-                    <input type="hidden" name="project_delete" value="{{ project.title }}"> <!-- 添加隐藏字段传递项目ID -->
-                    <input type="submit" value="删除项目"/>
+        <!-- 注释掉的代码块：原先用于删除项目的表单，已注释 -->
+        <!-- </form action="{% url 'project:project_delete' %}" method="post"> -->
+        <!-- {% for project in projects %} -->
+        <!--     <div class="project"> -->
+        <!--         <h2>{{ project.title }}</h2> -->
+        <!--         <input type="radio"  name="option1" value="project.title"> -->
+        <!--         <input type="submit" value="删除项目"/> -->
+        <!--     </div> -->
+        <!-- {% endfor %} -->
+        <!-- </form> -->
+        {% for project in projects %} <!-- 循环遍历projects列表 -->
+            <form action="{% url 'project:project_delete' %}" method="post"> <!-- 表单，提交删除项目的请求 -->
+                {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+                <div class="project"> <!-- 定义一个项目div -->
+                    <h2>{{ project.title }}</h2> <!-- 显示项目标题 -->
+                    <input type="hidden" name="project_delete" value="{{ project.title }}"> <!-- 隐藏输入框，传递项目标题 -->
+                    <input type="submit" value="删除项目"/> <!-- 提交按钮，删除项目 -->
                 </div>
             </form>
-            <form action="{% url 'project:project_details_list' %}" method="post" style="display:inline;">
-                {% csrf_token %}
-                <input type="hidden" name="project_datails" value="{{ project.title }}">
-                <button type="submit">查看项目详情列表</button>
+            <form action="{% url 'project:project_details_list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看项目详情的请求 -->
+                {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+                <input type="hidden" name="project_datails" value="{{ project.title }}"> <!-- 隐藏输入框，传递项目标题 -->
+                <button type="submit">查看项目详情列表</button> <!-- 提交按钮，查看项目详情 -->
             </form>
-        {% endfor %}
+        {% endfor %} <!-- 结束循环 -->
     </div>
 </body>
 </html>

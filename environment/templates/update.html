@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>删除环境</title>
+    <title>修改环境</title>
 </head>
 <body>
-    <div>删除环境成功</div> <!-- 显示成功消息 -->
+    <div>修改环境成功</div> <!-- 显示成功消息 -->
     {% for project_name in projects2 %} <!-- 循环显示项目名称 -->
         <div>
             <form action="{% url 'environment:list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看并编辑环境的请求 -->

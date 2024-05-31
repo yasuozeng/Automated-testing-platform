@@ -1,8 +1,11 @@
+import logging
+
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 import requests
 # Create your views here.
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def list(request):
     # 项目列表
@@ -10,6 +13,7 @@ def list(request):
     url = "http://localhost:5000/project/project_list"  # 确保这与运行Flask应用的地址和端口匹配
     response = requests.get(url)
     projects=response.json()
+    logging.info(f'projects:{projects}')
     context = {'projects': projects}  # 创建上下文数据
     return render(request, 'project_list.html', context)  # 渲染模板并返回响应
 
