@@ -5,18 +5,87 @@
     <title>接口用例详情</title>
 </head>
 <body>
-    <a href="{% url 'cases:list' %}">返回上一页</a>
+    {% for project_name in projects2 %}
+        <div>
+            <form action="{% url 'cases:list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看并编辑环境的请求 -->
+                {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+                <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+                <button type="submit">返回上一页</button> <!-- 提交按钮，查看并编辑环境 -->
+             </form>
+        </div>
+    {% endfor %}
+
     <div>
-        <form>
-            <h1>cases_id: {{ cases_id }}</h1>
-            接口用例名称：<input  type="text" placeholder="请输入接口用例名称"/><br /><br /><!--接口名称输入且换行两次-->
-            api信息:<h1>cases_api: {{ cases_api }}</h1><!--api信息展示-->
-            前置脚本：<input  type="text" placeholder="请输入接口前置脚本"/><br /><br /><!--前置脚本输入-->
-            请求头：<input  type="text" placeholder="请输入接口请求头"/><br /><br /><!--请求头输入-->
-            请求体：<input  type="text" placeholder="请输入接口请求体"/><br /><br /><!--请求体输入-->
-            后置断言脚本：<input  type="text" placeholder="请输入接口后置断言脚本"/><br /><br /><!--后置断言脚本输入-->
-            提交按钮   <input type="submit"/><!--提交以上输入内容-->
-        </form>
+        {% for old_title in old_title_list %}
+            <form method="post" action="{% url 'cases:update' %}" style="display:inline;">
+                {% csrf_token %}
+                <h1>old_title: {{ old_title }}</h1>
+                {% for interfaes_id in interfaes_id_list %}
+                    {% csrf_token %}
+                    <h1>
+                        接口id：{{ interfaes_id }}
+                    </h1>
+                {% endfor %}
+
+                {% for headers in headers_list %}
+                    {% csrf_token %}
+                    <h1>
+                        接口用例请求头：{{ headers }}
+                    </h1>
+                {% endfor %}
+
+                {% for case_request in case_request_list %}
+                    {% csrf_token %}
+                    <h1>
+                        接口用例请求参数：{{ case_request }}
+                    </h1>
+                {% endfor %}
+
+                {% for case_file in case_file_list %}
+                    {% csrf_token %}
+                    <h1>
+                        接口用例请求参数：{{ case_file }}
+                    </h1>
+                {% endfor %}
+
+                {% for case_setup_script in case_setup_script_list %}
+                    {% csrf_token %}
+                    <h1>
+                        接口用例前置脚本：{{ case_setup_script }}
+                    </h1>
+                {% endfor %}
+
+                {% for case_teardown_script in case_teardown_script_list %}
+                    {% csrf_token %}
+                    <h1>
+                        接口用例后置脚本：{{ case_teardown_script }}
+                    </h1>
+                {% endfor %}
+
+
+
+
+                接口用例名：
+                <input type="text" name="new_title" style="width: 200px; margin-right: 10px;" placeholder="请输入接口用例名">
+                接口id：
+                <input type="text" name="interface_url" style="width: 200px; margin-right: 10px;" placeholder="接口id">
+                接口用例请求头：
+                <input type="text" name="headers" style="width: 200px; margin-right: 10px;" placeholder="0or1">
+                接口用例请求参数：
+                <input type="text" name="case_request" style="width: 200px; margin-right: 10px;">
+                接口用例前置脚本：
+                <input type="text" name="case_setup_script" style="width: 200px; margin-right: 10px;">
+                接口用例后置脚本：
+                <input type="text" name="case_teardown_script" style="width: 200px; margin-right: 10px;">
+
+                <br /><br /><!--服务器域名输入且换行两次-->
+                <input type="hidden" name="old_title" value="{{ old_title }}"> <!-- 隐藏输入框，传递接口老名称 -->
+                <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+                提交按钮   <input type="submit"/><!--提交以上输入内容-->
+            </form>
+        {% endfor %}
+
     </div>
+
 </body>
 </html>

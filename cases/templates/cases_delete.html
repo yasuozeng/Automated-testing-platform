@@ -2,12 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>接口用例删除</title>
+    <title>删除接口用例</title>
 </head>
 <body>
-    <a href="{% url 'cases:list' %}">返回上一页</a>
+    <div>删除接口用例成功</div>
+    {% for project_name in projects2 %}
     <div>
-        接口用例删除成功
+        <form action="{% url 'cases:list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看并编辑环境的请求 -->
+            {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+            <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+            <button type="submit">返回上一页</button> <!-- 提交按钮，查看并编辑环境 -->
+         </form>
     </div>
+    {% endfor %}
+
+
+
+
+
+
 </body>
 </html>

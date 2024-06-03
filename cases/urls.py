@@ -25,5 +25,6 @@ urlpatterns = [
     path('interfaces', views.interfaces_list,name='interfaces'),
     path('details', views.details,name='details'),
     path('delete', views.delete,name='delete'),
-    path('add', views.list,name='add'),
+    path('add', views.add,name='add'),
+    path('update', views.update, name='update'),
 ]
