@@ -24,4 +24,6 @@ urlpatterns = [
     path('list', views.list,name='list'),
     path('details', views.details,name='details'),
     path('delete', views.delete,name='delete'),
+    path('add', views.add,name='add'),
+    path('update', views.update, name='update'),
 ]

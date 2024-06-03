@@ -5,24 +5,56 @@
     <title>接口详情</title>
 </head>
 <body>
-    <a href="{% url 'interfaces:list' %}">返回上一页</a>
+    {% for project_name in projects2 %}
+    <form action="{% url 'interfaces:list' %}" method="post" style="display:inline;"> <!-- 表单，提交查看并编辑接口的请求 -->
+        {% csrf_token %} <!-- 添加CSRF令牌，防止跨站请求伪造 -->
+        <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+        <button type="submit">返回上一页</button> <!-- 提交按钮，查看并编辑接口 -->
+    </form>
     <div>
-        <form>
-            <h1>interfaces_id: {{ interfaces_id }}</h1>
-            接口名称：<input  type="text" placeholder="请输入需要修改的接口名称"/><br /><br /><!--接口名称输入且换行两次-->
-            请求方式:<select>
-                        <option value="1">GET</option>
-                        <option value="2">POST</option>
-                        <option value="3">PUT</option>
-                        <option value="4">DELETE</option>
-                    </select>
-            <br /><br />
-            接口地址：<input  type="text" placeholder="/test/list"/><br /><br /><!--接口输入且换行两次-->
-<!--            请求头：<input  type="text" placeholder="请输入请求头"/><br /><br />&lt;!&ndash;接口名称输入且换行两次&ndash;&gt;-->
-<!--            请求体：<input  type="text" placeholder="请输入请求体"/><br /><br />&lt;!&ndash;接口名称输入且换行两次&ndash;&gt;-->
-            提交按钮   <input type="submit"/><!--提交以上输入内容-->
-        </form>
+        {% for interface_name in interface_name_list %}
+            <form method="post" action="{% url 'interfaces:update' %}" style="display:inline;">
+                {% csrf_token %}
+                <h1>interface_name: {{ interface_name }}</h1>
+                {% for interface_url in interface_url_list %}
+                    {% csrf_token %}
+                    <h1>
+                        接口名：{{ interface_url }}
+                    </h1>
+                {% endfor %}
+
+                {% for interface_method in interface_method_list %}
+                    {% csrf_token %}
+                    <h1>
+                        接口请求方式：{{ interface_method }}
+                    </h1>
+                {% endfor %}
+
+                {% for interface_type in interface_type_list %}
+                    {% csrf_token %}
+                    <h1>
+                        接口类型（1是项目接口）：{{ interface_type }}
+                    </h1>
+                {% endfor %}
+
+
+                接口名：
+                <input type="text" name="interface_new_name" style="width: 200px; margin-right: 10px;" placeholder="请输入接口名称">
+                接口url：
+                <input type="text" name="interface_url" style="width: 200px; margin-right: 10px;" placeholder="/ww">
+                接口类型（1是项目接口,0是第三方接口）：
+                <input type="text" name="interface_type" style="width: 200px; margin-right: 10px;" placeholder="0or1">
+                请求类型：
+                <input type="text" name="interface_method" style="width: 200px; margin-right: 10px;">
+                <br /><br /><!--服务器域名输入且换行两次-->
+                <input type="hidden" name="interface_old_name" value="{{ interface_name }}"> <!-- 隐藏输入框，传递接口老名称 -->
+                <input type="hidden" name="project_datails" value="{{ project_name }}"> <!-- 隐藏输入框，传递项目名称 -->
+                提交按钮   <input type="submit"/><!--提交以上输入内容-->
+            </form>
+        {% endfor %}
+
     </div>
+    {% endfor %}
 </body>
 </html>
 

@@ -97,8 +97,7 @@ def update(request):
     url = "http://localhost:5000/environment/environment_update"
     # 准备要发送的JSON数据
     data = {
-        # 'environment_old_name': '77',
-        # 'environment_new_name': '123',
+
         'environment_old_name': f'{environment_old_name}',
         'environment_new_name': f'{environment_new_name}',
         'project_name': f'{project_name}',
